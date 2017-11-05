@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+COMPOSE="docker-compose -f docker-compose.yml -f docker-compose.local.yml"
+TTY="-T"
+
+if [ $# -gt 0 ]; then
+    if [ "$1" == "entrada" ]; then
+        shift 1
+        $COMPOSE run --rm $TTY \
+            -w /var/www/html/app/ \
+            app \
+            php entrada "$@"
+    elif [ "$1" == "mysql" ]; then
+        shift 1
+        docker run --network simpsonwentradadocker_entradanet -it --link db:mariadb --rm mariadb sh -c 'exec mysql -uentrada -h db -ppassword'
+    else
+        $COMPOSE "$@"
+    fi
+else
+    $COMPOSE ps
+fi

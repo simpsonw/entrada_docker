@@ -1,0 +1,37 @@
+version: '2'
+services:
+    db:
+        build:
+          context: ./docker/db
+          dockerfile: Dockerfile
+        volumes:
+            - mysqldata:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_USER: entrada
+            MYSQL_PASSWORD: password
+        networks:
+            - entradanet
+    app:
+        build:
+          context: ./docker/app
+          dockerfile: Dockerfile
+        image: simpsonw/entrada/app
+        depends_on:
+            - db
+        volumes:
+            - /home/will/workspace/ualearn.dev:/var/www/html
+        environment:
+            ENTRADA_DB_HOST: db
+            ENTRADA_DB_DATABASE: gots
+            ENTRADA_DB_USER: gots
+            ENTRADA_DB_PASSWORD: gots
+
+        networks:
+            - entradanet
+networks:
+    entradanet:
+        driver: "bridge"
+volumes:
+    mysqldata:
+        driver: "local"

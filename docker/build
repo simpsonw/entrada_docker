@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker build -f app/Dockerfile -t simpsonw/entrada/app:latest ./app
+docker build -f db/Dockerfile -t simpsonw/entrada/db:latest ./db

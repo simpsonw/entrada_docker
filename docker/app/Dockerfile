@@ -61,6 +61,9 @@ RUN gem install colorize
 RUN gem install sshkit
 RUN gem install gnm-caplock
 
+# Tell Apache to include all of the virtual hosts
+RUN echo "IncludeOptional vhosts.d/*.conf" >> /etc/httpd/conf/httpd.conf
+
 # Copy Supervisor configuration.
 COPY supervisor/supervisord.conf /etc/supervisord.conf
 

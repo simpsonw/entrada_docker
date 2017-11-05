@@ -20,7 +20,8 @@ services:
         depends_on:
             - db
         volumes:
-            - /home/will/workspace/ualearn.dev:/var/www/html
+            - ~/workspace:/var/www/vhosts
+            - ./docker/app/httpd/vhosts.d:/etc/httpd/vhosts.d
         environment:
             ENTRADA_DB_HOST: db
             ENTRADA_DB_DATABASE: gots

@@ -68,5 +68,6 @@ RUN echo "IncludeOptional vhosts.d/*.conf" >> /etc/httpd/conf/httpd.conf
 COPY supervisor/supervisord.conf /etc/supervisord.conf
 
 RUN usermod -u 1000 apache 
+RUN groupmod -g 1000 apache 
 
 CMD ["/usr/bin/supervisord"]

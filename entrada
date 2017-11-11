@@ -6,8 +6,8 @@ TTY="-T"
 if [ $# -gt 0 ]; then
     if [ "$1" == "entrada" ]; then
         shift 1
-        $COMPOSE run --rm $TTY \
-            -w /var/www/html/app/ \
+        $COMPOSE run --rm \
+            -w /var/www/vhosts/ualearn.dev \
             app \
             php entrada "$@"
     elif [ "$1" == "mysql" ]; then

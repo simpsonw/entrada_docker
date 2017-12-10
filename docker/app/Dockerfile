@@ -70,4 +70,6 @@ COPY supervisor/supervisord.conf /etc/supervisord.conf
 RUN usermod -u 1000 apache 
 RUN groupmod -g 1000 apache 
 
+RUN chown -R apache:apache /var/lib/php
+
 CMD ["/usr/bin/supervisord"]
